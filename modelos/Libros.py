@@ -16,7 +16,7 @@ class Libro(Model):
 
 class Libro_Autor(Model):
     Libro = ForeignKeyField(Libro, on_delete='CASCADE')
-    autores = ForeignKeyField(Autores, on_delete='CASCADE')
+    autores = ForeignKeyField(Autores.Autor, on_delete='CASCADE')
 
 
     class Meta:

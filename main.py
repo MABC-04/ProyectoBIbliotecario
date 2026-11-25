@@ -11,6 +11,7 @@ app = FastAPI(
 @app.on_event("startup")
 def startup():
     CrearTablas()
+    print("Creando base de datos....")
 
 @app.on_event("shutdown")
 def shutdown():

@@ -1,11 +1,11 @@
-from modelos.Autores import Autores
+from modelos.Autores import Autor
 from modelos.Libros import Libro, Libro_Autor
 from modelos.Usuarios import Usuario
 from modelos.Prestamos import Prestamos
 from core.BDCONEXION import DB
 
 ALL_MODELOS = [
-    Autores,
+    Autor,
     Libro,
     Libro_Autor,
     Usuario,
