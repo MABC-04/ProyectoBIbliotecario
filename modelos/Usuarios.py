@@ -17,6 +17,6 @@ class Usuario(Model):
 
 
     class Meta:
-        DB = BDCONEXION.DB
-        db_table = "Usuario"
+        database = BDCONEXION.DB
+        db_table = "usuario"
 

@@ -15,5 +15,5 @@ class Prestamos(Model):
 
 
     class Meta:
-        DB = BDCONEXION.DB
-        db_table = "Prestamos"
+        database = BDCONEXION.DB
+        db_table = "prestamos"

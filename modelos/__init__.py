@@ -14,6 +14,6 @@ ALL_MODELOS = [
 
 def CrearTablas():
     with DB:
-        DB.crearTablas(ALL_MODELOS)
+        DB.create_tables(ALL_MODELOS,safe=True)
 
 

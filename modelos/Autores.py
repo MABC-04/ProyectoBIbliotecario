@@ -8,6 +8,6 @@ class Autor(Model):
     fecha_nacimiento = DateField()
 
 
-class Meta:
-    DB = BDCONEXION.DB
-    db_table = 'Autores'
+    class Meta:
+        database = BDCONEXION.DB
+        db_table = "autor"
