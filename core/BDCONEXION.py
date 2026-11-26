@@ -2,7 +2,7 @@ from peewee import *
 
 DB = MySQLDatabase(
     "GestionBibliotecaria",
-    user='root',
-    password='',
+    user='marco',
+    password='Marco655dark',
     host='localhost',
 )

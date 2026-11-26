@@ -1,7 +1,9 @@
 from fastapi import FastAPI
+
+from modelos import Libro
 from modelos.__init__ import CrearTablas
 from modelos.Usuarios import Usuario
-from schemas import UsuarioSchema
+from schemas import *
 
 app = FastAPI(
     title="Proyecto de gestiom biblioteca",
@@ -28,9 +30,9 @@ async def about():
     return {"About"}
 
 
-#peticion post para usuario
+#peticion para los usuarios
 
-@app.post("/usuario")
+@app.post("/usuario/")
 async def crearusuario(datos: UsuarioSchema):
     datos = Usuario.create(
         nombre=datos.nombre,
@@ -43,3 +45,16 @@ async def crearusuario(datos: UsuarioSchema):
 def get_usuario(usuario_id: int):
     usuario = Usuario.get_or_none(Usuario.id_usuario == usuario_id)
     return usuario
+
+
+#peticiones para los libros
+
+@app.post("/libros/")
+async def crear_libro(info: libroschema):
+    info = Libro.create(
+        titulo = info.titulo,
+        editorial = info.editorial,
+        fecha_publicacion = info.fecha_publicacion,
+        categoria = info.categoria,
+        stock = info.stock,
+    )
