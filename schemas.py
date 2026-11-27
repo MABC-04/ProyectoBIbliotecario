@@ -1,5 +1,4 @@
-from datetime import datetime
-
+from datetime import datetime, date
 from pydantic import BaseModel
 
 class UsuarioSchema(BaseModel):
@@ -12,6 +11,26 @@ class UsuarioSchema(BaseModel):
 class libroschema(BaseModel):
     titulo: str
     editorial: str
-    fecha_publicacion:datetime
-    categoria: str
+    fecha_publicacion:date
+    Categoria: str
     stock: int
+
+
+#schemas para prestamos
+
+class prestamoschema(BaseModel):
+    usuario: UsuarioSchema
+    libro: libroschema
+    fechaPrestamoSolicitado : date
+    fechaPrestamoDevolucion: date
+    FechalLimiteDevolucion: date
+
+
+
+#Schema para autores
+
+class AutoresSchema(BaseModel):
+    nombre: str
+    nacionalidad: str
+    fecha_nacimiento: date
+

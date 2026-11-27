@@ -1,60 +1,41 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
-
-from modelos import Libro
 from modelos.__init__ import CrearTablas
-from modelos.Usuarios import Usuario
-from schemas import *
-
-app = FastAPI(
-    title="Proyecto de gestiom biblioteca",
-    description="Implementacion de operaciones http",
-    summary="API para la gestion de libros",
-    version="0.0.1"
+from services import (
+    UsuariosServices,
+    LibroServices,
+    PrestamosServices,
+    AutorServices,
 )
 
-@app.on_event("startup")
-def startup():
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     CrearTablas()
     print("Creando base de datos....")
-
-@app.on_event("shutdown")
-def shutdown():
+    yield
     print("Cerrando API...")
 
-@app.get("/")
-async def index():
-    return {"Proyecto de gestion bibliotecaria"}
 
-@app.get("/about")
-async def about():
-    return {"About"}
+app = FastAPI(
+    title="Proyecto de gestión biblioteca",
+    description="Implementación de operaciones HTTP",
+    summary="API para la gestión de libros",
+    version="0.0.1",
+    lifespan=lifespan,
+)
 
-
-#peticion para los usuarios
-
-@app.post("/usuario/")
-async def crearusuario(datos: UsuarioSchema):
-    datos = Usuario.create(
-        nombre=datos.nombre,
-        email=datos.email,
-        telefono=datos.telefono,
-        direccion=datos.direccion,
-    )
-
-@app.get("/usuario/{id}")
-def get_usuario(usuario_id: int):
-    usuario = Usuario.get_or_none(Usuario.id_usuario == usuario_id)
-    return usuario
+app.include_router(UsuariosServices.router)
+app.include_router(LibroServices.router)
+app.include_router(PrestamosServices.router)
+app.include_router(AutorServices.router)
 
 
-#peticiones para los libros
+@app.get("/", tags=["General"])
+def index():
+    return {"mensaje": "Proyecto de gestión bibliotecaria"}
 
-@app.post("/libros/")
-async def crear_libro(info: libroschema):
-    info = Libro.create(
-        titulo = info.titulo,
-        editorial = info.editorial,
-        fecha_publicacion = info.fecha_publicacion,
-        categoria = info.categoria,
-        stock = info.stock,
-    )
+
+@app.get("/about", tags=["General"])
+def about():
+    return {"mensaje": "API de gestión bibliotecaria con FastAPI y Peewee"}
