@@ -9,7 +9,7 @@ class Prestamos(Model):
     Usuario = ForeignKeyField(Usuario, backref="Prestamos", on_delete='CASCADE')
     Libro = ForeignKeyField(Libro, backref="Prestamos", on_delete='CASCADE')
     fechaPrestamoSolicitado = DateField(default=date.today)
-    fechaPrestamoDevolucion = DateField()
+    fechaPrestamoDevolucion = DateField(null=True)
     fechaLimiteDevolucion = DateField()
 
 

@@ -6,6 +6,7 @@ from services import (
     LibroServices,
     PrestamosServices,
     AutorServices,
+    LibroAutorServicios
 )
 
 
@@ -29,6 +30,7 @@ app.include_router(UsuariosServices.router)
 app.include_router(LibroServices.router)
 app.include_router(PrestamosServices.router)
 app.include_router(AutorServices.router)
+app.include_router(LibroAutorServicios.router)
 
 
 @app.get("/", tags=["General"])

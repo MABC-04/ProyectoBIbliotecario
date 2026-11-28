@@ -25,6 +25,16 @@ def get_libro(libro_id: int):
     return libro.__data__
 
 
+@router.get("/")
+def getlibros():
+    lista_libros = list(Libro.select())
+
+    if lista_libros is None:
+        raise HTTPException(status_code=404, detail="no existen libros registrados")
+    else:
+        return (libros.__data__ for libros in lista_libros)
+
+
 @router.put("/{libro_id}")
 def put_libro(libro_id: int, info: libroschema):
     libro = Libro.get_or_none(Libro.Id_Libro == libro_id)

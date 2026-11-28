@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class UsuarioSchema(BaseModel):
     nombre: str
-    email: str
+    Email: str
     telefono: str
     direccion: str
 
@@ -34,3 +34,6 @@ class AutoresSchema(BaseModel):
     nacionalidad: str
     fecha_nacimiento: date
 
+class LibroAutorSchema(BaseModel):
+    libro_id: int
+    autor_id: int

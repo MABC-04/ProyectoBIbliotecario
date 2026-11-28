@@ -9,7 +9,7 @@ router = APIRouter(prefix="/usuarios", tags=["Usuarios"])
 def crear_usuario(datos: UsuarioSchema):
     nuevo_usuario = Usuario.create(
         nombre=datos.nombre,
-        email=datos.email,
+        Email=datos.Email,
         telefono=datos.telefono,
         direccion=datos.direccion,
     )
@@ -22,6 +22,18 @@ def get_usuario(usuario_id: int):
     if usuario is None:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
     return usuario.__data__
+
+@router.get("/")
+def get_usuarios():
+    usuarios = list(Usuario.select())
+
+    if not usuarios:
+        raise HTTPException(
+            status_code=404,
+            detail="No se encontraron usuarios"
+        )
+
+    return [usuario.__data__ for usuario in usuarios]
 
 
 @router.put("/{usuario_id}")

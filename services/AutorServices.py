@@ -17,7 +17,7 @@ def registrar_autores(autor: AutoresSchema):
 
 @router.get("/{autor_id}")
 def get_autores(autor_id: int):
-    autor = Autor.get_or_none(Autor.id == autor_id)
+    autor = Autor.get_or_none(Autor.id_Autores == autor_id)
     if autor is None:
         raise HTTPException(status_code=404, detail="Autor no encontrado")
     return autor.__data__
@@ -25,7 +25,7 @@ def get_autores(autor_id: int):
 
 @router.put("/{autor_id}")
 def modificar_autores(autor_id: int, autor: AutoresSchema):
-    autor_db = Autor.get_or_none(Autor.id == autor_id)
+    autor_db = Autor.get_or_none(autor_id)
     if autor_db is None:
         raise HTTPException(status_code=404, detail="Autor no encontrado")
 
